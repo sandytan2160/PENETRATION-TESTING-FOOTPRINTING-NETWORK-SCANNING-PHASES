@@ -29,14 +29,37 @@ The table below lists each tool used in this report and its purpose.
 
 | Tool | Purpose |
 |---|---|
-| Kali Linux & Windows | Operating systems used for reconnaissance activities                                         |
-| WHOIS                | Domain registration and name server information (owner, dates, name servers)                |
-| whatweb              | Identifies technologies and software used by a website (servers, CMS, plugins, IP)         |
+| Kali Linux & Windows | Operating systems used for reconnaissance activities.                                        |
+| WHOIS                | Domain registration and name server information (owner, dates, name servers).               |
+| whatweb              | Identifies technologies and software used by a website (servers, CMS, plugins, IP).        |
 | nslookup             | Resolves domain names into IP addresses using DNS.                                           |
 | curl -I              | Display HTTP response headers to observe information.                                        |
 | wafw00f              | Detects whether a website is protected by a Web Application Firewall.               |
 | dnsrecon             | Enumerate all DNS records (NS, MX, SPF, TXT, SRV).                                           |
-| theHarvester - baidu | Public information gathering using Baidu                                                     |
+| theHarvester - baidu | Public information gathering using Baidu.                                                    |
 | theHarvester - all   | Public information gathering from multiple sources.                                          |
 | Zenmap (Nmap GUI)    | Scan the local subnet to find live hosts, IPs, and MAC addresses.                          |
-| Windows CMD          | Local IP and MAC address identification                                                      |
+| Windows CMD          | Local IP and MAC address identification.                                                     |
+
+# 4. Activities Performed
+
+## 4.1 Footprinting & Reconnaissance
+
+I performed reconnaissance on the 'networkwalks.com' domain using six Kali Linux tools: WHOIS, WhatWeb, Nslookup, Curl, Wafw00f, and DNSRecon. Each tool provided different information about the target.
+With WHOIS, I observed publicly available domain registration details and the domain’s name servers. Using WhatWeb, I observed that the website was running WordPress 7.0.4 and WP Download Manager 3.3.58, along with other exposed technologies.
+With Nslookup, I observed that networkwalks.com resolved to the IP address 192.232.216.135. Using Curl with the -I option, I observed HTTP response headers and the exposed /wp-json/ WordPress REST API endpoint.
+With Wafw00f, I observed that the website was protected by ModSecurity (SpiderLabs). Finally, DNSRecon showed DNS information including name servers, mail servers, SPF/TXT records, service records, and DNS software information.
+
+## 4.2 Footprinting & Reconnaissance with theHARVESTER
+
+I used theHarvester in Kali Linux to perform footprinting and reconnaissance on the microsoft.com domain. I first used the following command to search for information from the Baidu search engine:
+theHarvester -d microsoft.com -l 1000 -b baidu, I then performed a broader search using multiple available sources with:
+theHarvester -d microsoft.com -l 50 -b all, From the results, I observed publicly available information related to the target domain, such as email addresses, subdomains, hosts, and other discovered details. This activity demonstrated how theHarvester can be used to collect information from public sources during the reconnaissance phase.
+
+## 4.3 Network Scanning with Zenmap
+
+I used Zenmap to perform network discovery on my local network. First, I used the Windows ipconfig command to identify my local IP address and subnet. I then entered the subnet into Zenmap and performed a Ping Scan to identify live hosts.
+From the scan, I observed the active devices on my local network along with their IP and MAC addresses. I also used Zenmap’s Topology section to visualize the discovered devices and their network relationships. The topology was then saved as a PDF as required by the practical task.
+The IP addresses, MAC addresses, and number of live hosts shown in this report are based on the results observed from my own local network.
+
+
